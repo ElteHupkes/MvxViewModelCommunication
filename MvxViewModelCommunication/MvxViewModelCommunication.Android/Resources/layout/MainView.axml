@@ -2,17 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:local="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="40dp"
-        local:MvxBind="Text Text" />
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Hey! Here's the final text:"/>
+  
+  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:textSize="40dp" local:MvxBind="Text FinalText"/>
+  
     <Button
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Reset"
-        android:textSize="40dp"
-        local:MvxBind="Click ResetTextCommand" />
+        android:text="Go change it"
+        local:MvxBind="Click GetChildText" />
 </LinearLayout>

@@ -69,9 +69,8 @@ namespace MvxViewModelCommunication.Core.Services
         ///
         /// <inheritdoc />
         ///
-        public Task NavigateForResult<TRequestViewModel, TViewModel, TResult>(TRequestViewModel receiver)
+        public Task NavigateForResult<TViewModel, TResult>(ITransactionRequesterViewModel<TResult> receiver)
             where TViewModel : ITransactionResponderViewModel
-            where TRequestViewModel : ITransactionRequesterViewModel<TResult>
         {
             var request = new MvxViewModelInstanceRequest(typeof(TViewModel));
             var viewModel = ViewModelLoader.LoadViewModel(request, null);
@@ -84,10 +83,9 @@ namespace MvxViewModelCommunication.Core.Services
         ///
         /// <inheritdoc />
         ///
-        public Task NavigateForResult<TRequestViewModel, TViewModel, TParameter, TResult>(TRequestViewModel receiver,
+        public Task NavigateForResult<TViewModel, TParameter, TResult>(ITransactionRequesterViewModel<TResult> receiver,
             TParameter parameter)
             where TViewModel : ITransactionResponderViewModel, IMvxViewModel<TParameter>
-            where TRequestViewModel : ITransactionRequesterViewModel<TResult>
         {
             var request = new MvxViewModelInstanceRequest(typeof(TViewModel));
             var vm = (IMvxViewModel<TParameter>)ViewModelLoader.LoadViewModel(request, parameter, null);
@@ -100,8 +98,7 @@ namespace MvxViewModelCommunication.Core.Services
         ///
         /// <inheritdoc />
         ///
-        public Task CloseWithResult<TResultViewModel, TResult>(TResultViewModel viewModel, TResult result)
-            where TResultViewModel : ITransactionResponderViewModel, IMvxViewModel
+        public Task CloseWithResult<TResult>(ITransactionResponderViewModel viewModel, TResult result)
         {
             var transactionId = viewModel.TransactionResponderId;
             viewModel.TransactionResponderId = null;

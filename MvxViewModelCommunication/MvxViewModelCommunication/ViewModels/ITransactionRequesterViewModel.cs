@@ -1,10 +1,12 @@
-﻿namespace MvxViewModelCommunication.Core.ViewModels
+﻿using MvvmCross.Core.ViewModels;
+
+namespace MvxViewModelCommunication.Core.ViewModels
 {
     /// <summary>
     /// Interface for a view model that is involved in a parent-to-child
     /// communication as a parent.
     /// </summary>
-    public interface ITransactionRequesterViewModel
+    public interface ITransactionRequesterViewModel : IMvxViewModel
     {
         /// <summary>
         /// The ID of the transaction the view model is requesting.

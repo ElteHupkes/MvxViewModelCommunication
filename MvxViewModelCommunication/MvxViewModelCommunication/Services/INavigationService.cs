@@ -15,13 +15,11 @@ namespace MvxViewModelCommunication.Core.Services
         /// Initializes a transaction between the receiver view model and
         /// the yet to be opened child view model for a result of type TResult.
         /// </summary>
-        /// <typeparam name="TRequestViewModel"></typeparam>
         /// <typeparam name="TViewModel"></typeparam>
         /// <typeparam name="TResult"></typeparam>
         /// <param name="receiver"></param>
         /// <returns></returns>
-        Task NavigateForResult<TRequestViewModel, TViewModel, TResult>(TRequestViewModel receiver)
-            where TRequestViewModel : ITransactionRequesterViewModel<TResult>
+        Task NavigateForResult<TViewModel, TResult>(ITransactionRequesterViewModel<TResult> receiver)
             where TViewModel : ITransactionResponderViewModel;
 
         /// <summary>
@@ -29,27 +27,23 @@ namespace MvxViewModelCommunication.Core.Services
         /// and the yet to be opened parameterized child view model,
         /// for a result of type TResult.
         /// </summary>
-        /// <typeparam name="TRequestViewModel"></typeparam>
         /// <typeparam name="TViewModel"></typeparam>
         /// <typeparam name="TParameter"></typeparam>
         /// <typeparam name="TResult"></typeparam>
         /// <param name="receiver"></param>
         /// <param name="parameter"></param>
         /// <returns></returns>
-        Task NavigateForResult<TRequestViewModel, TViewModel, TParameter, TResult>(TRequestViewModel receiver,
+        Task NavigateForResult<TViewModel, TParameter, TResult>(ITransactionRequesterViewModel<TResult> receiver,
             TParameter parameter)
-            where TRequestViewModel : ITransactionRequesterViewModel<TResult>
             where TViewModel : ITransactionResponderViewModel, IMvxViewModel<TParameter>;
 
         /// <summary>
         /// Sets the result of a transaction and closes the view model
         /// </summary>
-        /// <typeparam name="TResultViewModel"></typeparam>
         /// <typeparam name="TResult"></typeparam>
         /// <param name="viewModel"></param>
         /// <param name="result"></param>
-        Task CloseWithResult<TResultViewModel, TResult>(TResultViewModel viewModel, TResult result)
-            where TResultViewModel : ITransactionResponderViewModel, IMvxViewModel;
+        Task CloseWithResult<TResult>(ITransactionResponderViewModel viewModel, TResult result);
 
         /// <summary>
         /// Checks if a transaction result is available for this view model

@@ -1,4 +1,8 @@
-﻿using MvvmCross.Core.ViewModels;
+﻿using MvvmCross.Core.Navigation;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+using MvxViewModelCommunication.Core.Services;
+using MvxViewModelCommunication.Core.ViewModels;
 
 namespace MvxViewModelCommunication.Core
 {
@@ -8,7 +12,10 @@ namespace MvxViewModelCommunication.Core
         {
             base.Initialize();
 
-            RegisterNavigationServiceAppStart<>();
+            Mvx.LazyConstructAndRegisterSingleton<IMvxNavigationCache, MvxNavigationCache>();
+            Mvx.LazyConstructAndRegisterSingleton<INavigationService, NavigationService>();
+            Mvx.LazyConstructAndRegisterSingleton<IMvxNavigationService>(Mvx.Resolve<INavigationService>);
+            RegisterNavigationServiceAppStart<MainViewModel>();
         }
     }
 }
