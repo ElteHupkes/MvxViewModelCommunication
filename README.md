@@ -82,8 +82,8 @@ public class ChildViewModel : BaseViewModel
     {
         NavigationService.CloseWithResult(this, new TextResult { Text = "My result text" });
     }
-	
-	// ...
+    
+    // ...
 }
 ```
 
