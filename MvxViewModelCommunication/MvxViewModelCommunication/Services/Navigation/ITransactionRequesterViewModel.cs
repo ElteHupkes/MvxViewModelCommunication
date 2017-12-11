@@ -1,6 +1,6 @@
 ﻿using MvvmCross.Core.ViewModels;
 
-namespace MvxViewModelCommunication.Core.ViewModels
+namespace MvxViewModelCommunication.Core.Services.Navigation
 {
     /// <summary>
     /// Interface for a view model that is involved in a parent-to-child

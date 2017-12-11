@@ -1,4 +1,4 @@
-﻿namespace MvxViewModelCommunication.Core.ViewModels
+﻿namespace MvxViewModelCommunication.Core.Services.Navigation
 {
     /// <summary>
     /// Interface for a view model that can both receive and send data

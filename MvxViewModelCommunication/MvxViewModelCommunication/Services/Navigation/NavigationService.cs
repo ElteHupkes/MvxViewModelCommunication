@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform.Platform;
-using MvxViewModelCommunication.Core.ViewModels;
 
-namespace MvxViewModelCommunication.Core.Services
+namespace MvxViewModelCommunication.Core.Services.Navigation
 {
     public class NavigationService : MvxNavigationService, INavigationService
     {
@@ -205,8 +204,6 @@ namespace MvxViewModelCommunication.Core.Services
             var obj = resultTuple.Item3;
 
             // Find the result method on the view model
-            // The name of the method, the type we pass here doesn't matter
-            // for the naming, this is just more convenient if we ever rename it.
             const string onResultName = nameof(ITransactionRequesterViewModel<object>.OnResult);
             var resultMethod = viewModel.GetType().GetMethods()
                 .Where(m =>

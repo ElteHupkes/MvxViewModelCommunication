@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 using MvvmCross.Core.ViewModels;
-using MvxViewModelCommunication.Core.Services;
+using MvxViewModelCommunication.Core.Services.Navigation;
 using MvxViewModelCommunication.Core.ViewModels.Results;
 
 namespace MvxViewModelCommunication.Core.ViewModels

@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
-using MvxViewModelCommunication.Core.ViewModels;
 
-namespace MvxViewModelCommunication.Core.Services
+namespace MvxViewModelCommunication.Core.Services.Navigation
 {
     /// <summary>
     /// Interface for a custom navigation service with extra methods for

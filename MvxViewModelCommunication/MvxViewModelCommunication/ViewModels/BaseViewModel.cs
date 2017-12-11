@@ -1,9 +1,12 @@
 ﻿using System.Threading.Tasks;
 using MvvmCross.Core.ViewModels;
-using MvxViewModelCommunication.Core.Services;
+using MvxViewModelCommunication.Core.Services.Navigation;
 
 namespace MvxViewModelCommunication.Core.ViewModels
 {
+    /// <summary>
+    /// Base view model to use with persistent view model communication.
+    /// </summary>
     public abstract class BaseViewModel : MvxViewModel, ITransactionViewModel
     {
         /// <summary>
