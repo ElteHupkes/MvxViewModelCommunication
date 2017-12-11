@@ -19,9 +19,20 @@ And return a result like this in a child view model:
     }
 ```
 
-However, there is a problem with this approach. When your app gets suspended (tombstoned, or whatever you like to call it) the view model objects are discarded, and result passing breaks entirely. It gets even more complicated on Android, where individual activities may be killed to save memory. This scenario isn't very likely in real life, but there's a developer option called "Don't keep activities" that is the most straightforward way to test activity suspension without going out of your way. When enabled, this option kills any Android activity as soon as it is disappears from view even if it is technically still present in the stack. Upon returning to it, the activity will be restored with a bundle passed to `OnCreate` (which previously would have to be populated in `OnSaveInstanceState`). "Don't keep activities" doesn't test real suspension though, because the service layer remains in tact and MvvmCross may actually cache the view model there to speed up this kind of quick activity recovery, which also occurs when the device is rotated.
+However, there is a problem with this approach. When your app gets suspended (tombstoned, or whatever you like to call it) the view model objects are discarded, and result passing breaks entirely. 
+It gets even more complicated on Android, where individual activities may be killed to save memory. This scenario isn't very likely in real life, if not for a developer option called "Don't keep activities" 
+which happens to be the most straightforward way to test activity suspension without going out of your way. When enabled, this option kills any Android activity as soon as it is disappears 
+from view even if it is technically still present in the stack. Upon returning to it, the activity will be restored with a bundle passed to `OnCreate` (which previously would have to be populated in `OnSaveInstanceState`).
+ "Don't keep activities" doesn't test real suspension though, because the service layer remains in tact, and MvvmCross may actually cache the view model there to speed up this kind of quick activity recovery. This was
+ implemented mostly to support rapid recovery after a device rotation, which also results in a new activity being launched.
 
-All that being said, app suspension accounts for a non-insignificant amount of complaints about unexpected behavior or even crashes in our app. Therefore I would personally like to work with a result mechanism that can handle all kinds of activity (/ view model) suspension scenarios. In the past we experimented mostly with message passing using `MvxMessenger` (something I think was popularized by [this article](https://gregshackles.com/returning-results-from-view-models-in-mvvmcross/)). The problem here is again Android, where when returning from a suspended state the receiving view model may not be initialized. We therefore had to implement separate mechanism using `StartActivityForResult` for that platform, which resulted in duplicate code and all other sorts of complications. Much rather we'd have a solution which:
+All that being said, app suspension accounts for a non-insignificant amount of complaints about unexpected behavior or even crashes in our app. 
+Therefore I would personally like to work with a result mechanism that can handle all kinds of activity (/ view model) suspension scenarios, not just those where the view models remain alive. 
+In the past we experimented mostly with message passing using 
+`MvxMessenger` (something I think was popularized by [this article](https://gregshackles.com/returning-results-from-view-models-in-mvvmcross/)). The problem here is again Android, where when returning 
+from a suspended state the view model receiving a result is only revived after its child (the one generating the result) has returned. 
+We therefore had to implement separate mechanism using `StartActivityForResult` for that platform, which resulted in duplicate code and all other sorts of complications. 
+Much rather we'd have a solution which:
 
 - Works on all platforms without platform specific code
 - Supports all sorts of freaky suspension scenarios
