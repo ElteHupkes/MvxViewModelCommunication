@@ -42,7 +42,7 @@ Fortunately, I think I've implemented such a solution!
 
 ## What it looks like
 Let's say we have `ParentViewModel` receiving a result from a `ChildViewModel`. The relevant code would look as follows. First we have a class which
-contains the result (this could actually just be s `string` in this case, but let's pretend there's more there):
+contains the result (this could actually just be a `string` in this case, but let's pretend there's more there):
 
 ```csharp
 public class TextResult 
